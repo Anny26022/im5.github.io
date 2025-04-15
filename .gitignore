@@ -1,0 +1,19 @@
+# CSV Data
+public/data/*.csv
+
+# Uploaded files
+uploads/
+
+# Node dependencies
+node_modules/
+
+# Build output
+out/
+dist/
+
+# OS, IDE, logs
+.DS_Store
+.env
+*.log
+.idea/
+.vscode/

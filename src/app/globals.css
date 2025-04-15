@@ -1,0 +1,304 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Hardware-accelerated elements */
+.hw-accel {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  will-change: transform, opacity;
+}
+
+/* Disable hardware acceleration */
+.no-hw-accel * {
+  transform: none !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+  will-change: auto !important;
+}
+
+/* Custom dialog animations */
+@keyframes dialogSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.dialog-content-enter {
+  animation: dialogSlideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Mobile-specific dialog adjustments */
+@media (max-width: 640px) {
+  .dialog-mobile-size {
+    width: 92% !important;
+    max-width: 420px !important;
+    max-height: 85vh !important;
+    margin: 0 auto !important;
+  }
+
+  /* Adjust grid for better mobile layout */
+  .symbol-grid-mobile {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    max-height: 50vh !important;
+  }
+
+  /* Make badges fill width on mobile */
+  .symbol-badge-mobile {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Adjust padding for mobile */
+  .mobile-dialog-padding {
+    padding: 16px !important;
+  }
+
+  .mobile-dialog-header {
+    padding: 16px 16px 12px 16px !important;
+  }
+
+  .mobile-dialog-footer {
+    padding: 10px !important;
+  }
+
+  .dialog-mobile-size [data-dialog-close="true"] {
+    right: 0.5rem !important;
+    top: 0.5rem !important;
+  }
+}
+
+/* Adjust the position of the dialog close button */
+.w-\\[420px\\] [data-dialog-close="true"] {
+  right: 0.75rem !important;
+  top: 0.75rem !important;
+  z-index: 10;
+}
+
+/* Animation utilities for industry hover effects */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.animate-in {
+  animation-duration: 150ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+.fade-in-up {
+  animation: fadeInUp 100ms ease forwards;
+}
+
+/* Basic tooltip animation */
+.industry-tooltip-animation {
+  animation: fadeIn 0.15s ease-out, scaleIn 0.15s ease-out;
+  transform-origin: top left;
+}
+
+/* Direct transition utilities */
+.transition-50 {
+  transition-duration: 50ms !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.transition-100 {
+  transition-duration: 100ms !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.transition-150 {
+  transition-duration: 150ms !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Smooth appear/fade animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 5px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 100ms ease forwards;
+}
+
+/* Global element transitions */
+button,
+.button {
+  transition:
+    background-color 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card transitions */
+.card {
+  transition:
+    transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Table row hover optimization */
+tr {
+  transition: background-color 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tab transitions */
+[role="tab"] {
+  transition:
+    background-color 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Input focus transitions */
+input, textarea, select {
+  transition:
+    border-color 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced button styling for better visibility */
+button.border-input,
+.button.border-input {
+  border-width: 1.5px;
+}
+
+/* Improved code and pre elements styling */
+pre {
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--muted));
+  color: hsl(var(--foreground));
+}
+
+/* Custom scrollbar styling */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted)) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground));
+}
+
+/* Hide scrollbar in Firefox but keep functionality */
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar in Chrome/Safari but keep functionality */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Add custom styles for dropdown menu positioning */
+.chart-download-dropdown [data-radix-popper-content-wrapper] {
+  position: absolute !important;
+  top: 100% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin-top: 8px !important;
+  z-index: 999 !important;
+}
